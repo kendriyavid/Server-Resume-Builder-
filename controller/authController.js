@@ -5,6 +5,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const handleLogin = async(req,res)=>{
+    console.log("yeah") 
+    console.log(req.body)
     const {email,password} = req.body;
     console.log(email,password)
     if (!email||!password){
@@ -15,7 +17,7 @@ const handleLogin = async(req,res)=>{
         if (!userDB){
             res.sendStatus(400).json({"message":"User not Found"})
         }else{
-            try {
+            try { 
                 const match = await bcrypt.compare(password,userDB.hpassword)
                 if (!match){
                     res.sendStatus(400).json({"message":"Username or Password is wrong"})
@@ -32,8 +34,11 @@ const handleLogin = async(req,res)=>{
                     )
                     userDB.refreshToken = refreshToken
                     const result = await userDB.save();
-                    console.log(result)
-                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:10000,secure:true}).sendStatus(200);
+                    console.log(result) 
+                    //saving the access token
+                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:10000,secure:true});
+                    res.json({accessToken})
+                    console.log(accessToken)
                 }
             } catch (error) {
                 console.log(error)
