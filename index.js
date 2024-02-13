@@ -11,6 +11,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/')
 )
 app.use(cors({
     origin:"http://localhost:5173",
+    credentials:true,
 }))
 
 app.use(express.json())
@@ -19,8 +20,6 @@ app.use('/register',require('./router/register'))
 app.use('/auth',require('./router/auth'))
 app.use('/refresh',require('./router/refresh'))
 app.use('/logout',require('./router/logout'))
-
-
 app.use('/form',require('./router/form'))
 
 app.listen(PORT,()=>{

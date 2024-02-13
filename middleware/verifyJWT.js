@@ -2,7 +2,9 @@ const jwt = require('jsonwebtoken')
 require('dotenv').config();
 
 const verifyJWT = (req,res,next)=>{
+    console.log("verification in process")
     const authHeader = req.headers['authorization']
+    console.log(authHeader)
     if (!authHeader) {
         return res.sendStatus(401);
     }

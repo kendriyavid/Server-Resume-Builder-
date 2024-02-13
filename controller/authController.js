@@ -8,9 +8,9 @@ const handleLogin = async(req,res)=>{
     console.log("yeah") 
     console.log(req.body)
     const {email,password} = req.body;
-    console.log(email,password)
     if (!email||!password){
         res.sendStatus(400).json({"message":"All fields are required"})
+        return
     }else{
         console.log(`${email},${password}`)
         const userDB = await user.findOne({email})
@@ -36,7 +36,7 @@ const handleLogin = async(req,res)=>{
                     const result = await userDB.save();
                     console.log(result) 
                     //saving the access token
-                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:10000,secure:true});
+                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:10000,secure:false});
                     res.json({accessToken})
                     console.log(accessToken)
                 }
