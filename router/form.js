@@ -4,6 +4,6 @@ const formController = require("./../controller/formController")
 const verifyJWT = require('./../middleware/verifyJWT')
 
 router.route("/")
-            .post(verifyJWT,formController.handleForm)
+            .post(formController.handleForm)
 
 module.exports = router;
