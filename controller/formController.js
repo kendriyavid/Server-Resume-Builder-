@@ -5,6 +5,8 @@ const fs = require('fs')
 const Docxtemplater = require('docxtemplater')
 const PizZip = require('pizzip')
 let date = new Date();
+const base64  = require("base-64")
+// import userModel from "./../models/userModel";
 
 const handleForm = async(req,res)=>{
     console.log(process.cwd())
@@ -17,6 +19,13 @@ const handleForm = async(req,res)=>{
     doc.setData(Data)
     doc.render()
     const generatedDoc = doc.getZip().generate({type:'nodebuffer'})
+    const gendoc_64 = generatedDoc.toString('base64')
+    // console.log(gendoc_64)
+    // console.log("here")
+    const reftoken =req.cookies
+    console.log(reftoken)
+    // find the user by ref token
+    // then use save
     fs.writeFileSync(`./${req.body.fname}${req.body.lname}${date.getSeconds().toString()}${date.getMilliseconds().toString()}.docx`,generatedDoc)
 }
 

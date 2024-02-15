@@ -30,7 +30,7 @@ const handleLogin = async(req,res)=>{
                     const refreshToken = jwt.sign(
                         {"username": userDB.username},
                         process.env.REFRESH_TOKEN_SECRET,
-                        {expiresIn:'600s'}
+                        {expiresIn:'1d'}
                     )
                     userDB.refreshToken = refreshToken
                     const result = await userDB.save();
@@ -38,6 +38,7 @@ const handleLogin = async(req,res)=>{
                     //saving the access token
                     res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:10000,secure:false});
                     res.json({accessToken})
+                    
                     console.log(accessToken)
                 }
             } catch (error) {

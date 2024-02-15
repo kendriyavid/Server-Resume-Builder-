@@ -95,6 +95,9 @@ const userModel = new mongoose.Schema({
         },
         skills:{
             type:mongoose.SchemaTypes.Array
+        },
+        genresume:{
+            type:mongoose.SchemaTypes.Array
         }
     }
 })
