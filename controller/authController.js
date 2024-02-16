@@ -25,7 +25,7 @@ const handleLogin = async(req,res)=>{
                     const accessToken = jwt.sign(
                         {"username": userDB.username},
                         process.env.ACCESS_TOKEN_SECRET,
-                        {expiresIn:'120s'}
+                        {expiresIn:'1d'}
                     )
                     const refreshToken = jwt.sign(
                         {"username": userDB.username},
@@ -36,7 +36,7 @@ const handleLogin = async(req,res)=>{
                     const result = await userDB.save();
                     console.log(result) 
                     //saving the access token
-                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:10000,secure:false});
+                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:24 * 60 * 60 * 1000,secure:false});
                     res.json({accessToken})
                     
                     console.log(accessToken)
