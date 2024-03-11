@@ -18,8 +18,8 @@ const handleRegister = async(req,res)=>{
         console.log("3")
         const userDB = await user.findOne({email});
         if (userDB){
-            console.log("4")
-            res.redirect(301,"login")
+            console.log(userDB)
+            res.json("redirect to login")
             return
         }else{
             try {

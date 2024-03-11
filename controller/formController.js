@@ -9,8 +9,10 @@ const base64  = require("base-64")
 // const user = require('./../models/userModel')
 const handleForm = async(req,res)=>{
      console.log(process.cwd())
-
-    const template = fs.readFileSync('./controller/resume_001.docx')
+     const { selectedTemplate, ...formData } = req.body;
+     const name  = selectedTemplate.name
+     console.log("name",name)
+    const template = fs.readFileSync(`./controller/${name}`)
     const zip = new PizZip(template)
     const doc =new Docxtemplater(zip)
     const Data = req.body
@@ -18,12 +20,16 @@ const handleForm = async(req,res)=>{
     doc.render()
     const generatedDoc = doc.getZip().generate({type:'nodebuffer'})
     const gendoc_64 = generatedDoc.toString('base64')
+    const filepath = `./${Data.fname}${Data.lname}${date.getSeconds().toString()}${date.getMilliseconds().toString()}.docx`
+    fs.writeFileSync(filepath,generatedDoc)
     // console.log(gendoc_64)
     // console.log("here")
-    const refreshToken =req.cookies
+    const refreshToken =req.cookies.jwt
+    console.log(refreshToken)
     const userDB=  await user.findOne({refreshToken})
     if (!userDB){
-        res.sendStatus(401).json({"message":"Unauthorized"})
+        console.log("here")
+        res.json({"message":"Unauthorized"})
     }else{
         userDB.resume.fname = Data.fname
         userDB.resume.lname = Data.lname
@@ -44,12 +50,15 @@ const handleForm = async(req,res)=>{
         userDB.resume.sLocation = Data.slocation
         userDB.resume.startDate = Data.startdate
         userDB.resume.title = Data.title
+        userDB.resume.genresume.push({
+            "filename":`${Data.fname}${Data.lname}`,
+            "filepath":filepath
+        })
         const result = await userDB.save()
-
+        res.json({"message":"CV created redirecting to the download page"})
     }
     // find the user by ref token
     // then use save
-    fs.writeFileSync(`./${req.body.fname}${req.body.lname}${date.getSeconds().toString()}${date.getMilliseconds().toString()}.docx`,generatedDoc)
 }
 
 module.exports=  {handleForm}

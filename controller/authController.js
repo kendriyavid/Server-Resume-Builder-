@@ -15,7 +15,7 @@ const handleLogin = async(req,res)=>{
         console.log(`${email},${password}`)
         const userDB = await user.findOne({email})
         if (!userDB){
-            res.sendStatus(400).json({"message":"User not Found"})
+            res.json({"message":"User not Found"})
         }else{
             try { 
                 const match = await bcrypt.compare(password,userDB.hpassword)
@@ -36,7 +36,7 @@ const handleLogin = async(req,res)=>{
                     const result = await userDB.save();
                     console.log(result) 
                     //saving the access token
-                    res.cookie('jwt',refreshToken,{httpOnly:true, maxAge:24 * 60 * 60 * 1000,secure:false});
+                    res.cookie('jwt',refreshToken,{httpOnly:false, maxAge:24 * 60 * 60 * 1000,secure:false});
                     res.json({accessToken})
                     
                     console.log(accessToken)
