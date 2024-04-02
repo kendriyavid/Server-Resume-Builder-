@@ -42,5 +42,18 @@ const downloadResume = async(req,res)=>{
     }
 }
 
+const getResumeUrl = async (req, res) => {
+    console.log(req.params)
+    const { id } = req.params;
+    console.log(id) // Assuming the id parameter is provided in the URL
+    try {
+        // Construct the URL using the provided id
+        const resdata = `http://localhost:3000/googlefile/${id}`; // Replace "your-domain.com" with your actual domain
+        return res.json({ "url": resdata }); // Return the URL
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json("Internal Server Error");
+    }
+}
 
-module.exports = {handleResume, downloadResume}
+module.exports = {handleResume, downloadResume, getResumeUrl}

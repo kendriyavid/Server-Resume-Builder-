@@ -6,7 +6,8 @@ const PORT = process.env.PORT||3000;
 const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
-mongoose.connect('mongodb://127.0.0.1:27017/')
+const CONNECTION_STRING = "mongodb+srv://harshdeep7thc:Newage301@cluster0.fe2w5lj.mongodb.net/?retryWrites=true&w=majority"
+mongoose.connect(CONNECTION_STRING)
 .then(
     console.log("connected")
 )
@@ -20,6 +21,7 @@ app.use(cookieParser())
 
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use('/rn', express.static(path.join(__dirname, '')));
+app.use('/googlefile',express.static(path.join(__dirname,'')))
 
 
 app.use('/register',require('./router/register'))

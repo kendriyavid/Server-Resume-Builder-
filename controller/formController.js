@@ -1,12 +1,12 @@
 const {Router} = require("express")
+const { degrees, PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const user=  require('./../models/userModel')
 const router = Router();
 const fs = require('fs')
 const Docxtemplater = require('docxtemplater')
 const PizZip = require('pizzip')
 let date = new Date();
-const base64  = require("base-64")
-// const user = require('./../models/userModel')
+
 const handleForm = async(req,res)=>{
      console.log(process.cwd())
      const { selectedTemplate, ...formData } = req.body;
@@ -19,7 +19,6 @@ const handleForm = async(req,res)=>{
     doc.setData(Data)
     doc.render()
     const generatedDoc = doc.getZip().generate({type:'nodebuffer'})
-    const gendoc_64 = generatedDoc.toString('base64')
     const filepath = `./${Data.fname}${Data.lname}${date.getSeconds().toString()}${date.getMilliseconds().toString()}.docx`
     fs.writeFileSync(filepath,generatedDoc)
     // console.log(gendoc_64)
@@ -57,8 +56,10 @@ const handleForm = async(req,res)=>{
         const result = await userDB.save()
         res.json({"message":"CV created redirecting to the download page"})
     }
-    // find the user by ref token
-    // then use save
+   
 }
 
-module.exports=  {handleForm}
+
+
+module.exports = { handleForm };
+
