@@ -1,7 +1,7 @@
 const {Router} = require('express')
 const user= require('./../models/userModel')
 const router = Router();
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const handleLogin = async(req,res)=>{

@@ -1,6 +1,6 @@
 const {Router} = require('express')
 const user = require('./../models/userModel')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 
 const handleRegister = async(req,res)=>{
     const {username,email,password,confirmPassword,DOB}=req.body
