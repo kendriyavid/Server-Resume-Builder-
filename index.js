@@ -14,7 +14,7 @@ mongoose.connect(CONNECTION_STRING)
     console.log("connected")
 )
 app.use(cors({
-    origin: '*',
+    origin: 'http://localhost:5173/register',
     credentials:true,
 }))
 
