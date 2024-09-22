@@ -46,6 +46,7 @@ const bcrypt = require('bcryptjs');
 
 const handleRegister = async (req, res) => {
     const { username, email, password, confirmPassword, DOB } = req.body;
+    console.log(req.body)
     console.log("I am here");
     console.log(req.body);
 
