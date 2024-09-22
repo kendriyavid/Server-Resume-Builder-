@@ -1,4 +1,5 @@
 const express  =require('express')
+require('dotenv').config(); // Load environment variables
 const app = express()
 const userController = require('./controller/userController')
 const cookieParser = require('cookie-parser')
@@ -6,7 +7,8 @@ const PORT = process.env.PORT||3000;
 const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
-const CONNECTION_STRING = "mongodb+srv://harshdeep7thc:Newage301@cluster0.fe2w5lj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+const CONNECTION_STRING = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`;
+
 mongoose.connect(CONNECTION_STRING)
 .then(
     console.log("connected")
