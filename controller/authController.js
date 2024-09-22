@@ -5,7 +5,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 require('dotenv').config();
 const handleLogin = async(req,res)=>{
-    console.log("yeah") 
+    console.log("yeah")
+    console.log(process.env.ACCESS_TOKEN_SECRET) 
     console.log(req.body)
     const {email,password} = req.body;
     if (!email||!password){
