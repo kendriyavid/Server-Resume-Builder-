@@ -7,7 +7,7 @@ const PORT = process.env.PORT||3000;
 const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
-const CONNECTION_STRING = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}/${process.env.MONGO_DB_NAME}?retryWrites=true&w=majority&appName=Cluster0&tls=true`;
+const CONNECTION_STRING = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}?retryWrites=true&w=majority&appName=Cluster0&tls=true`;
 console.log(process.env.MONGO_USERNAME, process.env.MONGO_CLUSTER);
 mongoose.connect(CONNECTION_STRING)
 .then(
