@@ -26,13 +26,21 @@ app.use('/rn', express.static(path.join(__dirname, '')));
 app.use('/googlefile',express.static(path.join(__dirname,'')))
 
 
-app.use('/register',require('./router/register'))
-app.use('/auth',require('./router/auth'))
-app.use('/refresh',require('./router/refresh'))
-app.use('/logout',require('./router/logout'))
-app.use('/form',require('./router/form'))
-app.use('/getresune',require('./router/resume'))
-app.use('/resumetemplates',require('./router/resumeTemplates'))
+// app.use('/register',require('./router/register'))
+// app.use('/auth',require('./router/auth'))
+// app.use('/refresh',require('./router/refresh'))
+// app.use('/logout',require('./router/logout'))
+// app.use('/form',require('./router/form'))
+// app.use('/getresune',require('./router/resume'))
+// app.use('/resumetemplates',require('./router/resumeTemplates'))
+app.use('/harshdeepkv/register', require('./router/register'));
+app.use('/harshdeepkv/auth', require('./router/auth'));
+app.use('/harshdeepkv/refresh', require('./router/refresh'));
+app.use('/harshdeepkv/logout', require('./router/logout'));
+app.use('/harshdeepkv/form', require('./router/form'));
+app.use('/harshdeepkv/getresume', require('./router/resume'));
+app.use('/harshdeepkv/resumetemplates', require('./router/resumeTemplates'));
+
 app.listen(PORT,()=>{
     console.log(`server listening on port ${PORT}`)
 })
