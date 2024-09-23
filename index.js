@@ -9,10 +9,23 @@ const mongoose = require('mongoose')
 const path = require('path')
 const CONNECTION_STRING = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_CLUSTER}?retryWrites=true&w=majority&appName=Cluster0&tls=true`;
 console.log(process.env.MONGO_USERNAME, process.env.MONGO_CLUSTER);
-mongoose.connect(CONNECTION_STRING)
-.then(
-    console.log("connected")
-)
+// mongoose.connect(CONNECTION_STRING)
+mongoose.connect(CONNECTION_STRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,
+    tls: true,});
+    const db = mongoose.connection;
+
+    db.on('error', (error) => {
+      console.error('MongoDB connection error:', error);
+      console.error('Error details:', JSON.stringify(error, null, 2));
+    });
+    
+    db.once('open', function() {
+      console.log('Connected successfully to MongoDB Atlas');
+    });
+    
 app.use(cors({
     origin: 'http://localhost:5173',
     credentials:true,
