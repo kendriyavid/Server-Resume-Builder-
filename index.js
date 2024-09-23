@@ -46,6 +46,7 @@ app.use('/logout',require('./router/logout'))
 app.use('/form',require('./router/form'))
 app.use('/getresune',require('./router/resume'))
 app.use('/resumetemplates',require('./router/resumeTemplates'))
+app.use('/check',require('./router/check'))
 // app.use('/harshdeepkv/register', require('./router/register'));
 // app.use('/harshdeepkv/auth', require('./router/auth'));
 // app.use('/harshdeepkv/refresh', require('./router/refresh'));
