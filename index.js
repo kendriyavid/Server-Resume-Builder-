@@ -33,7 +33,7 @@ mongoose.connect(CONNECTION_STRING, {
 
 const allowedOrigins = [
   'http://localhost:5173',
-  'http://localhost:4173/',
+  'http://localhost:4173',
 ];
 
 app.use(cors({
