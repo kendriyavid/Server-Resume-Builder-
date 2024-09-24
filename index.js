@@ -34,6 +34,7 @@ mongoose.connect(CONNECTION_STRING, {
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:4173',
+  'https://resumebuilder-un89.onrender.com/'
 ];
 
 app.use(cors({
